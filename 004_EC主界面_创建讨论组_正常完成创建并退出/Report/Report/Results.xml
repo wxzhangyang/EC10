@@ -1,0 +1,523 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE Report
+[
+<!ELEMENT Report (General ,(Doc|BPT)) >
+<!ATTLIST Report ver CDATA #REQUIRED tmZone CDATA #REQUIRED>
+
+<!ELEMENT General ( DocLocation ) >
+<!ATTLIST General productName CDATA #REQUIRED productVer CDATA #REQUIRED os CDATA #REQUIRED host CDATA #REQUIRED qcserver CDATA #IMPLIED qcproject CDATA #IMPLIED SolManSolutionId CDATA #IMPLIED SolManProjectId CDATA #IMPLIED SolManTestPlanId CDATA #IMPLIED SolManTestPackageId CDATA #IMPLIED SolManUserInfoData CDATA #IMPLIED  >
+
+<!ELEMENT BPT (DName,Res,DVer?,TSet?,TInst?,NodeArgs,AdditionalInfo*,Doc*) >
+<!ATTLIST BPT rID ID #REQUIRED >
+
+<!ELEMENT Doc (DName,ConfName?,Res,DVer?,TSet?,TInst?,RunType?,DT?,AdditionalInfo*,Step*,DIter*,Step*,Action*,Doc*,Summary?,TestMaintenanceSummary*,NodeArgs?) >
+<!ATTLIST Doc rID ID #REQUIRED type (Test|BC|BPTWrapperTest|Flow|Group|Action) "Test" productName CDATA #REQUIRED BCIter CDATA #IMPLIED >
+
+<!ELEMENT RunType ( #PCDATA )>
+<!ATTLIST RunType fmStep (False|True) "False" batch (False|True) "False" upDesc (False|True) "False" upChk (False|True) "False" upAS (False|True) "False">
+
+<!ELEMENT DName ( #PCDATA ) >
+
+<!ELEMENT ConfName ( #PCDATA ) >
+
+<!ELEMENT Res ( #PCDATA ) >
+
+<!ELEMENT AdditionalInfo (AdditionalDataName,AdditionalDataValue ) >
+
+<!ELEMENT AdditionalDataName ( #PCDATA ) >
+
+<!ELEMENT AdditionalDataValue ( #PCDATA ) >
+
+<!ELEMENT DVer ( #PCDATA ) >
+
+<!ELEMENT TSet ( #PCDATA ) >
+
+<!ELEMENT TInst ( #PCDATA ) >
+
+<!ELEMENT DIter (Step*,Action+,Summary?,NodeArgs)>
+<!ATTLIST DIter rID ID #REQUIRED iterID CDATA #REQUIRED>
+
+<!ELEMENT DocLocation ( #PCDATA )>
+
+<!ELEMENT Action (AName,AIter*,(Step|HtmlStep|Action)*, Summary,ActionMaintenanceSummary*, NodeArgs ) >
+<!ATTLIST Action rID ID #REQUIRED>
+
+<!ELEMENT AIter ((Step|HtmlStep|Action)*,DataMapping?, Summary?,NodeArgs) >
+<!ATTLIST AIter rID ID #REQUIRED iterID CDATA #REQUIRED isCountable (False|True) "False" >
+
+<!ELEMENT AName ( #PCDATA ) >
+
+<!ELEMENT TestMaintenanceSummary (ActionMaintenanceSummary*) >
+<!ATTLIST TestMaintenanceSummary ObjectsAdded CDATA #REQUIRED ObjectsUpdated CDATA #REQUIRED StepsUpdated CDATA #REQUIRED StepsComments CDATA #REQUIRED><!ELEMENT ActionMaintenanceSummary (ObjectChange* ) >
+<!ATTLIST ActionMaintenanceSummary Action CDATA #REQUIRED Objects CDATA #REQUIRED Updated CDATA #REQUIRED LinesTotal CDATA #REQUIRED Added CDATA #REQUIRED LinesUpdated CDATA #REQUIRED>
+
+<!ELEMENT ObjectChange  (Hierarchy, PropertyChangeList* ) >
+<!ATTLIST ObjectChange Operation CDATA #IMPLIED OriginalRepository CDATA #IMPLIED>
+
+<!ELEMENT PropertyChangeList (PropertyDef*) >
+
+<!ELEMENT PropertyDef (OriginalValue, NewValue) >
+<!ATTLIST PropertyDef PropName CDATA #REQUIRED OriginRegularExpression (True|False) "False" NewRegularExpression (True|False) "False" AddedProperty (True|False) "False" >
+
+<!ELEMENT OriginalValue ( #PCDATA )>
+
+<!ELEMENT NewValue ( #PCDATA )>
+
+<!ELEMENT Hierarchy  (ObjectName, Hierarchy*) >
+<!ATTLIST Hierarchy MicClass CDATA #REQUIRED>
+
+<!ELEMENT ObjectName  ( #PCDATA ) >
+
+<!ELEMENT Step (Obj,Details,Time,TimeTick* ,(Step|HtmlStep|Doc)*, DataMapping?, NodeArgs) >
+<!ATTLIST Step rID ID #REQUIRED retval CDATA #IMPLIED>
+
+<!ELEMENT HtmlStep (HTML,TimeTick*,(Step|HtmlStep|Doc)*,NodeArgs) >
+<!ATTLIST HtmlStep rID ID #REQUIRED >
+
+<!ELEMENT Obj ( #PCDATA ) >
+<!ATTLIST Obj plainTxt (False|True) "True">
+
+<!ELEMENT Details ( #PCDATA ) >
+<!ATTLIST Details plainTxt (False|True) "True">
+
+<!ELEMENT Time ( #PCDATA ) >
+
+<!ELEMENT HTML ( #PCDATA ) >
+
+<!ELEMENT Disp ( #PCDATA ) >
+
+<!ELEMENT TimeTick ( #PCDATA ) >
+
+<!ELEMENT DataMapping ( DataMappedItem* )>
+<!ELEMENT DataMappedItem EMPTY >
+<!ATTLIST DataMappedItem dsName CDATA #REQUIRED >
+<!ATTLIST DataMappedItem rowId CDATA #REQUIRED >
+
+<!ELEMENT NodeArgs (Disp,TopPane?,BtmPane?,ExtendedInfo? )>
+<!ATTLIST NodeArgs eType CDATA #REQUIRED icon CDATA #REQUIRED nRep CDATA #REQUIRED UserNote CDATA #IMPLIED filter (False|True) "True">
+<!ATTLIST NodeArgs status (Passed|Failed|Done|Warning|Information) "Done">
+<!ATTLIST NodeArgs iconSel CDATA #IMPLIED nType CDATA #IMPLIED MovieMarker CDATA "">
+<!ATTLIST NodeArgs Source CDATA #IMPLIED SourceLine CDATA #IMPLIED StepFlowItemKey CDATA #IMPLIED >
+
+<!ELEMENT TopPane (Path)>
+
+<!ELEMENT BtmPane ( (Path|WR)?,ASHilite?)>
+<!ATTLIST BtmPane vType CDATA "HTML">
+
+<!ELEMENT Path ( #PCDATA ) >
+
+<!ELEMENT ASHilite ( #PCDATA ) >
+
+<!ELEMENT WR ( #PCDATA ) >
+
+<!ELEMENT ExtendedInfo ( StepData ) >
+
+<!ATTLIST ExtendedInfo StepType CDATA #REQUIRED>
+<!ELEMENT DT (NodeArgs) >
+<!ATTLIST DT rID ID #REQUIRED>
+
+<!ELEMENT Summary (Param*)>
+<!ATTLIST Summary sTime CDATA #IMPLIED eTime CDATA #IMPLIED passed CDATA #IMPLIED failed CDATA #IMPLIED warnings CDATA #IMPLIED retval CDATA #IMPLIED stopped (False|True) "False" >
+
+<!ELEMENT Param (ParamName,ParamVal)+ >
+<!ATTLIST Param paramInOut (In|Out) "In">
+
+<!ELEMENT ParamName ( #PCDATA ) >
+
+<!ELEMENT ParamVal ( #PCDATA ) >
+
+]
+>
+<Report ver="2.0" tmZone="中国标准时间">
+<General productName="HP Unified Functional Testing" productVer="12.0" os="Windows 7" host="RD-ZHANGYANG"><DocLocation><![CDATA[D:\QTP_EC10\004_EC主界面_创建讨论组_正常完成创建并退出]]></DocLocation></General>
+<Doc rID="T1"   productName= "HP Unified Functional Testing"  >
+<DName><![CDATA[004_EC主界面_创建讨论组_正常完成创建并退出]]></DName>
+<Res><![CDATA[Report]]></Res>
+<DT rID="T2">
+<NodeArgs eType="Table" icon="10" nRep="4" filter="False" >
+<Disp><![CDATA[Run-Time Data Table]]></Disp>
+<BtmPane vType="Table" >
+<Path><![CDATA[Default.xls]]></Path>
+</BtmPane>
+</NodeArgs>
+</DT>
+<Step rID="T3">
+<Obj ><![CDATA[Output to global sheet]]></Obj>
+<Details ><![CDATA[Name: EC号码
+Value: 18611110001]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:49]]></Time>
+<TimeTick>1534494409</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="6" status="Information" >
+<Disp><![CDATA[Output to global sheet]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T4">
+<Obj ><![CDATA[Output to global sheet]]></Obj>
+<Details ><![CDATA[Name: 讨论组名称
+Value: 同事讨论组Auto]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:49]]></Time>
+<TimeTick>1534494409</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="7" status="Information" >
+<Disp><![CDATA[Output to global sheet]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T5">
+<Obj ><![CDATA[This test is run in the EC-QA  environment by ZhangYang on RD-ZHANGYANG]]></Obj>
+<Details ><![CDATA[]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:49]]></Time>
+<TimeTick>1534494409</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="8" status="Information" >
+<Disp><![CDATA[This test is run in the EC-QA  environment by ZhangYang on RD-ZHANGYANG]]></Disp>
+</NodeArgs>
+</Step>
+<DIter rID="T6" iterID="1" >
+<Action rID="T7">
+<AName><![CDATA[Action1]]></AName>
+<Action rID="T8">
+<AName><![CDATA[EC_10主界面 [EC10_主面板]]]></AName>
+<Step rID="T9">
+<Obj ><![CDATA[Action Run: 单击创建进入创建讨论组页]]></Obj>
+<Details ><![CDATA[Data Row: 3]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:50]]></Time>
+<TimeTick>1534494410</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="12" status="Information" >
+<Disp><![CDATA[Action Run: 单击创建进入创建讨论组页]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T10">
+<Obj plainTxt="False" ><![CDATA[EC10.0]]></Obj>
+<Details plainTxt="False" ><![CDATA[Window]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:51]]></Time>
+<TimeTick>1534494411</TimeTick>
+<Step rID="T11">
+<Obj plainTxt="False" ><![CDATA[创建按钮.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:51]]></Time>
+<TimeTick>1534494411</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="15" Source="EC_10主界面 [EC10_主面板]" SourceLine="-1" >
+<Disp><![CDATA[创建按钮.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T12">
+<Obj plainTxt="False" ><![CDATA[创建-创建讨论组.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:51]]></Time>
+<TimeTick>1534494411</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="17" Source="EC_10主界面 [EC10_主面板]" SourceLine="-1" >
+<Disp><![CDATA[创建-创建讨论组.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="15" nRep="14" Source="EC_10主界面 [EC10_主面板]" SourceLine="-1" >
+<Disp><![CDATA[EC10.0]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T13">
+<Obj plainTxt="False" ><![CDATA[讨论组管理]]></Obj>
+<Details plainTxt="False" ><![CDATA[Window]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:52]]></Time>
+<TimeTick>1534494412</TimeTick>
+<Step rID="T14">
+<Obj plainTxt="False" ><![CDATA[创建讨论组页.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:52]]></Time>
+<TimeTick>1534494412</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="19" Source="EC_10主界面 [EC10_主面板]" SourceLine="-1" >
+<Disp><![CDATA[创建讨论组页.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="15" nRep="18" Source="EC_10主界面 [EC10_主面板]" SourceLine="-1" >
+<Disp><![CDATA[讨论组管理]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T15">
+<Obj ><![CDATA[是否成功打开创建讨论组页]]></Obj>
+<Details ><![CDATA[已成功打开创建讨论组页！]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:52]]></Time>
+<TimeTick>1534494412</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="20" status="Passed" Source="EC_10主界面 [EC10_主面板]" SourceLine="-1" >
+<Disp><![CDATA[是否成功打开创建讨论组页]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T16">
+<Obj plainTxt="False" ><![CDATA[讨论组管理]]></Obj>
+<Details plainTxt="False" ><![CDATA[Window]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:52]]></Time>
+<TimeTick>1534494412</TimeTick>
+<Step rID="T17">
+<Obj plainTxt="False" ><![CDATA[创建讨论组页.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:52]]></Time>
+<TimeTick>1534494412</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="22" Source="EC_10主界面 [EC10_主面板]" SourceLine="-1" >
+<Disp><![CDATA[创建讨论组页.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="15" nRep="21" Source="EC_10主界面 [EC10_主面板]" SourceLine="-1" >
+<Disp><![CDATA[讨论组管理]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T18">
+<Obj ><![CDATA[是否成功打开创建讨论组页]]></Obj>
+<Details ><![CDATA[已成功打开创建讨论组页！]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:52]]></Time>
+<TimeTick>1534494412</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="23" status="Passed" Source="EC_10主界面 [EC10_主面板]" SourceLine="-1" >
+<Disp><![CDATA[是否成功打开创建讨论组页]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="2018/8/17 - 16:26:49" eTime="2018/8/17 - 16:26:53" passed="2" failed="0" warnings="0" ><Param ><ParamName><![CDATA[Action]]></ParamName><ParamVal><![CDATA[单击创建进入创建讨论组页]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="14" nRep="11" status="Passed" >
+<Disp><![CDATA[EC_10主界面 [EC10_主面板] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Action rID="T19">
+<AName><![CDATA[创建讨论组 [EC10_讨论组]]]></AName>
+<Step rID="T20">
+<Obj ><![CDATA[Action Run: 创建讨论组]]></Obj>
+<Details ><![CDATA[Data Row: 1]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:53]]></Time>
+<TimeTick>1534494413</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="26" status="Information" >
+<Disp><![CDATA[Action Run: 创建讨论组]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T21">
+<Obj plainTxt="False" ><![CDATA[讨论组管理]]></Obj>
+<Details plainTxt="False" ><![CDATA[Window]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:54]]></Time>
+<TimeTick>1534494414</TimeTick>
+<Step rID="T22">
+<Obj plainTxt="False" ><![CDATA[讨论组管理.DblClick]]></Obj>
+<Details plainTxt="False" ><![CDATA[360, 260, 0]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:54]]></Time>
+<TimeTick>1534494414</TimeTick>
+<NodeArgs eType="Replay" icon="15" nRep="29" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[讨论组管理.DblClick]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T23">
+<Obj plainTxt="False" ><![CDATA[讨论组搜索.Type]]></Obj>
+<Details plainTxt="False" ><![CDATA["18611110001"]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:55]]></Time>
+<TimeTick>1534494415</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="31" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[讨论组搜索.Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T24">
+<Obj plainTxt="False" ><![CDATA[讨论组管理.DblClick]]></Obj>
+<Details plainTxt="False" ><![CDATA[120, 106, 0]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:56]]></Time>
+<TimeTick>1534494416</TimeTick>
+<NodeArgs eType="Replay" icon="15" nRep="33" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[讨论组管理.DblClick]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T25">
+<Obj plainTxt="False" ><![CDATA[确定.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:57]]></Time>
+<TimeTick>1534494417</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="35" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[确定.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="15" nRep="28" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[讨论组管理]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T26">
+<Obj plainTxt="False" ><![CDATA[EC10.0]]></Obj>
+<Details plainTxt="False" ><![CDATA[Window]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:58]]></Time>
+<TimeTick>1534494418</TimeTick>
+<Step rID="T27">
+<Obj plainTxt="False" ><![CDATA[输入框.Type]]></Obj>
+<Details plainTxt="False" ><![CDATA["18611110001"]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:58]]></Time>
+<TimeTick>1534494418</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="38" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[输入框.Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T28">
+<Obj plainTxt="False" ><![CDATA[消息发送.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:58]]></Time>
+<TimeTick>1534494418</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="40" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[消息发送.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="15" nRep="37" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[EC10.0]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="2018/8/17 - 16:26:53" eTime="2018/8/17 - 16:26:58" passed="0" failed="0" warnings="0" ><Param ><ParamName><![CDATA[Action]]></ParamName><ParamVal><![CDATA[创建讨论组]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="14" nRep="25" >
+<Disp><![CDATA[创建讨论组 [EC10_讨论组] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Action rID="T29">
+<AName><![CDATA[创建讨论组 [EC10_讨论组]]]></AName>
+<Step rID="T30">
+<Obj ><![CDATA[Action Run: 更改讨论组名]]></Obj>
+<Details ><![CDATA[Data Row: 2]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:58]]></Time>
+<TimeTick>1534494418</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="43" status="Information" >
+<Disp><![CDATA[Action Run: 更改讨论组名]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T31">
+<Obj plainTxt="False" ><![CDATA[EC10.0]]></Obj>
+<Details plainTxt="False" ><![CDATA[Window]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:59]]></Time>
+<TimeTick>1534494419</TimeTick>
+<Step rID="T32">
+<Obj plainTxt="False" ><![CDATA[EC10.0.DblClick]]></Obj>
+<Details plainTxt="False" ><![CDATA[390, 30, 0]]></Details>
+<Time><![CDATA[2018/8/17 - 16:26:59]]></Time>
+<TimeTick>1534494419</TimeTick>
+<NodeArgs eType="Replay" icon="15" nRep="46" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[EC10.0.DblClick]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T33">
+<Obj plainTxt="False" ><![CDATA[讨论组名.Type]]></Obj>
+<Details plainTxt="False" ><![CDATA["同事讨论组Auto"]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:01]]></Time>
+<TimeTick>1534494421</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="48" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[讨论组名.Type]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="15" nRep="45" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[EC10.0]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="2018/8/17 - 16:26:58" eTime="2018/8/17 - 16:27:01" passed="0" failed="0" warnings="0" ><Param ><ParamName><![CDATA[Action]]></ParamName><ParamVal><![CDATA[更改讨论组名]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="14" nRep="42" >
+<Disp><![CDATA[创建讨论组 [EC10_讨论组] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Action rID="T34">
+<AName><![CDATA[创建讨论组 [EC10_讨论组]]]></AName>
+<Step rID="T35">
+<Obj ><![CDATA[Action Run: 退出讨论组]]></Obj>
+<Details ><![CDATA[Data Row: 3]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:01]]></Time>
+<TimeTick>1534494421</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="51" status="Information" >
+<Disp><![CDATA[Action Run: 退出讨论组]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T36">
+<Obj plainTxt="False" ><![CDATA[EC10.0]]></Obj>
+<Details plainTxt="False" ><![CDATA[Window]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:03]]></Time>
+<TimeTick>1534494423</TimeTick>
+<Step rID="T37">
+<Obj plainTxt="False" ><![CDATA[搜索讨论组.Type]]></Obj>
+<Details plainTxt="False" ><![CDATA["同事讨论组Auto"]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:03]]></Time>
+<TimeTick>1534494423</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="54" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[搜索讨论组.Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T38">
+<Obj plainTxt="False" ><![CDATA[退出讨论组.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:05]]></Time>
+<TimeTick>1534494425</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="56" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[退出讨论组.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T39">
+<Obj plainTxt="False" ><![CDATA[确定.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:05]]></Time>
+<TimeTick>1534494425</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="58" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[确定.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T40">
+<Obj plainTxt="False" ><![CDATA[搜索讨论组.Type]]></Obj>
+<Details plainTxt="False" ><![CDATA["同事讨论组Auto"]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:06]]></Time>
+<TimeTick>1534494426</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="60" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[搜索讨论组.Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T41">
+<Obj plainTxt="False" ><![CDATA[搜索结果校验.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:07]]></Time>
+<TimeTick>1534494427</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="61" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[搜索结果校验.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="15" nRep="53" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[EC10.0]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T42">
+<Obj ><![CDATA[是否正常退出讨论组?]]></Obj>
+<Details ><![CDATA[退出成功!]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:07]]></Time>
+<TimeTick>1534494427</TimeTick>
+<NodeArgs eType="User" icon="11" nRep="62" status="Passed" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[是否正常退出讨论组?]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T43">
+<Obj plainTxt="False" ><![CDATA[EC10.0]]></Obj>
+<Details plainTxt="False" ><![CDATA[Window]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:08]]></Time>
+<TimeTick>1534494428</TimeTick>
+<Step rID="T44">
+<Obj plainTxt="False" ><![CDATA[清除搜索框.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[2018/8/17 - 16:27:08]]></Time>
+<TimeTick>1534494428</TimeTick>
+<NodeArgs eType="Replay" icon="16" nRep="65" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[清除搜索框.Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="15" nRep="64" Source="创建讨论组 [EC10_讨论组]" SourceLine="-1" >
+<Disp><![CDATA[EC10.0]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="2018/8/17 - 16:27:01" eTime="2018/8/17 - 16:27:08" passed="1" failed="0" warnings="0" ><Param ><ParamName><![CDATA[Action]]></ParamName><ParamVal><![CDATA[退出讨论组]]></ParamVal>
+</Param>
+</Summary>
+<NodeArgs eType="StartAction" icon="14" nRep="50" status="Passed" >
+<Disp><![CDATA[创建讨论组 [EC10_讨论组] Summary]]></Disp>
+</NodeArgs>
+</Action>
+<Summary sTime="2018/8/17 - 16:26:49" eTime="2018/8/17 - 16:27:08" passed="0" failed="0" warnings="0" ></Summary>
+<NodeArgs eType="StartAction" icon="13" nRep="10" status="Passed" >
+<Disp><![CDATA[Action1 Summary]]></Disp>
+</NodeArgs>
+</Action>
+<NodeArgs eType="StartIteration" icon="12" nRep="9" status="Passed" >
+<Disp><![CDATA[004_EC主界面_创建讨论组_正常完成创建并退出 Iteration 1 (Row 1)]]></Disp>
+</NodeArgs>
+</DIter>
+<Summary sTime="2018/8/17 - 16:26:48" eTime="2018/8/17 - 16:27:08" passed="3" failed="0" warnings="0" ></Summary>
+<NodeArgs eType="StartTest" icon="9" nRep="3" status="Passed" >
+<Disp><![CDATA[Test 004_EC主界面_创建讨论组_正常完成创建并退出 Summary]]></Disp>
+</NodeArgs>
+</Doc>
+</Report>

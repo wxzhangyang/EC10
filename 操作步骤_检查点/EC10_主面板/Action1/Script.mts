@@ -80,13 +80,14 @@ Select Case Lcase(strType)
 				End If
 		'===============3.单击创建，进入创建讨论组页面===================
 			Case Lcase("进入创建讨论组页")	
-				indow("EC10.0").InsightObject("创建按钮").Click
+				Window("EC10.0").InsightObject("创建按钮").Click
 				Window("EC10.0").InsightObject("创建-创建讨论组").Click
 				If Window("讨论组管理").InsightObject("创建讨论组页").Exist(5) Then
 					Reporter.ReportEvent micPass,"是否成功打开创建讨论组页","已成功打开创建讨论组页！"	
 				else
 				Window("EC10.0").InsightObject("创建按钮").Click
 				Window("EC10.0").InsightObject("创建-创建讨论组").Click
+				End If
 				If Window("讨论组管理").InsightObject("创建讨论组页").Exist(5) Then
 					Reporter.ReportEvent micPass,"是否成功打开创建讨论组页","已成功打开创建讨论组页！"	
 				     else
@@ -96,27 +97,29 @@ Select Case Lcase(strType)
 				     Window("讨论组管理").InsightObject("创建讨论组页").Exist(5)
 					 Reporter.ReportEvent micPass,"第二次点击是否成功打开创建讨论组页","已成功打开创建讨论组页！"
 				     End if
-				End If
+				
 		'===============4.单击创建，进入添加好友页面===================
 			Case Lcase("进入添加好友页")	
 				window("EC10.0").InsightObject("创建按钮").Click
 				Window("EC10.0").InsightObject("创建-添加好友").Click
 
-				If Window("添加好友").InsightObject("添加好友页").Exist(5) Then
+				If Window("添加EC好友").InsightObject("添加好友页").exist(5) Then
 					Reporter.ReportEvent micPass,"是否成功打开添加好友页","已成功打开添加好友页！"	
 				else
 				Window("EC10.0").InsightObject("创建按钮").Click
 				Window("EC10.0").InsightObject("创建-添加好友").Click
-				     If Window("添加好友").InsightObject("添加好友页").Exist(5) Then
+				End if
+				     If Window("添加EC好友").InsightObject("添加好友页").Exist(5) Then
+
 					Reporter.ReportEvent micPass,"是否成功打开添加好友页","已成功打开添加好友页！"	
 				     else
 				     Reporter.ReportEvent micFail,"是否成功打开添加好友页","未成功打开添加好友页！重试打开一次。"
 				     Window("EC10.0").InsightObject("创建按钮").Click
 				     Window("EC10.0").InsightObject("创建-添加好友").Click
-				     Window("添加好友").InsightObject("添加好友页").Exist(5)
+				     Window("添加EC好友").InsightObject("添加好友页").Exist(5) 
 					 Reporter.ReportEvent micPass,"第二次点击是否成功打开添加好友页","已成功打开添加好友页！"
 				     End if
-				End If
+			
 		'===============5.单击会话列表，进入会话列表===================
 			Case Lcase("进入会话列表")	
 			If Window("EC10.0").InsightObject("会话列表激活状态").Exist(5) Then
@@ -138,18 +141,34 @@ Select Case Lcase(strType)
 	  	'===============7.单击我的客户，进入客户管理页===================
 			Case Lcase("进入我的客户页")	
 				If Window("EC10.0").InsightObject("我的客户激活状态").Exist(5) Then
-					Reporter.ReportEvent micPass,"我的客户页是否已经打开","已经打开！"	
+					Reporter.ReportEvent micPass,"我的客户页是否已经激活","已经激活！"	
 				else
 				Window("EC10.0").InsightObject("我的客户入口").Click
 				End If
+				If Window("EC10.0").InsightObject("新建客户").Exist(10) then
+					Reporter.ReportEvent micPass,"我的客户页是否成功打开","成功打开！"	
+					else
+					Reporter.ReportEvent micFail,"我的客户页是否成功打开","打开失败，尝试再次打开！"
+					End If
+					Window("EC10.0").InsightObject("会话列表入口").Click   '先点击会话入口，切换到会话列表
+					Window("EC10.0").InsightObject("我的客户入口").Click    '再点击我的客户，切换到客户列表
+					
+				If Window("EC10.0").InsightObject("新建客户").Exist(10) then
+					Reporter.ReportEvent micPass,"我的客户页是否成功打开","成功打开！"	
+					else
+					Reporter.ReportEvent micFail,"我的客户页是否成功打开","打开失败，检查网络或环境！"
+					 Call ExitRun()
+					End If
 		'===============8.单击销售助手，打开销售助手===================
 			Case Lcase("进入销售助手")	
+				
+				Window("EC10.0").InsightObject("销售助手入口").Click
+				
 				If Window("销售助手").InsightObject("销售助手页检查点").Exist(5) Then
 					Reporter.ReportEvent micPass,"销售助手页是否已经打开","已经打开！"	
 				else
 				Window("EC10.0").InsightObject("销售助手入口").Click
-
-				End If	
+				End If
 		'===============9.单击电话，打开电话窗口===================
 			Case Lcase("打开电话页面")	
 				If Window("电话窗口").Window("Window").Exist(5) Then
@@ -162,7 +181,7 @@ Select Case Lcase(strType)
 				If Window("短信助手").Exist(5) Then
 					Reporter.ReportEvent micPass,"短信页面是否已经打开","已经打开！"	
 				else
-				Window("EC10.0").InsightObject("短信助手入口").Click
+				Window("EC10.0").InsightObject("短信助手入口").Click 
 				End If	
 		'===============11.单击应用中心入口，打开应用中心页===================
 			Case Lcase("打开应用中心页面")	
