@@ -262,10 +262,25 @@ Select Case Lcase(strType)
                     Call ExitRun()
                    End If
                  if Window("销售助手").InsightObject("销售助手窗口最大化未激活按钮").exist(2) Then 
-                    Reporter.ReportEvent micPass, "销售助手窗口是否正常切换到最小化","正常切换到最小化!"
+                    Reporter.ReportEvent micPass, "销售助手窗口是否正常切换为初始窗口大小","正常切换!"
                     Else
-                    reporter.ReportEvent micFail,"销售助手窗口是否正常切换到最小化?","没有正常切换到最小化!"
+                    reporter.ReportEvent micFail,"销售助手窗口是否正常切换为初始窗口大小?","没有正常切换!"
                      Call ExitRun()
                     End If
+                 If Window("销售助手").InsightObject("销售助手窗口最小化按钮").Exist(2) Then
+                 	Reporter.ReportEvent micPass, "销售助手页面最小化按钮是否存在","最小化按钮存在!"
+                    else
+                    reporter.ReportEvent micFail,"销售助手页面最小化按钮是否存在","最小化按钮不存在!"
+                    Call ExitRun()
+                    End if
+                 If Window("销售助手").InsightObject("销售助手窗口设置入口").Exist(2) Then
+                    Window("销售助手").InsightObject("销售助手窗口设置入口").Click
+                    End if
+                    If Window("销售助手").InsightObject("销售助手设置打开页").exist(2) Then
+                 	Reporter.ReportEvent micPass, "销售助手设置是否打开","正常打开!"
+                    else
+                    reporter.ReportEvent micFail,"销售助手设置是否打开","未打开!"
+                    Call ExitRun()
+                    End If   
         End Select
 End Select
